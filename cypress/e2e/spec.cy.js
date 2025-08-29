@@ -14,8 +14,6 @@
 	- propriedade = [placeholder=''] - a propriedade é o que esta dentro do []
 	- atributo = [placeholder='nome'] - o atributo é o que está dentro das ''
 	- todo objeto tem uma propriedade que pode ter ou nao atributo
-
-
 */
 
 
