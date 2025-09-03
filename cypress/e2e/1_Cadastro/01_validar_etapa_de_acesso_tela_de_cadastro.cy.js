@@ -24,10 +24,7 @@ context('Tela de cadastro', () => {
 
     describe('Validação de acesso a tela de cadastro', () => {
         beforeEach(() => {
-            cy.visit('https://automationexercise.com/')
-
-            cy.get('.shop-menu > .nav > :nth-child(4) > a')
-                .click()
+            cy.VisitaTelaCadastro()
 
         })
         
@@ -47,7 +44,7 @@ context('Tela de cadastro', () => {
             })
         });
 
-        it.only('Email incompleto sem @', () => {
+        it('Email incompleto sem @', () => {
             cy.get('[data-qa="signup-email"]')
                 .type('teste') // e-mail inválido
 
@@ -82,15 +79,7 @@ context('Tela de cadastro', () => {
         })
 
         it('Dados validos', () => {
-            cy.get('[data-qa="signup-name"]')
-                .type(randomMail)
-
-            cy.get('[data-qa="signup-email"]')
-                .type(randomMail)
-
-            cy.get('[data-qa="signup-button"]')
-                .click()
-
+            cy.LoginNovoUsuario()
         });
     })
 

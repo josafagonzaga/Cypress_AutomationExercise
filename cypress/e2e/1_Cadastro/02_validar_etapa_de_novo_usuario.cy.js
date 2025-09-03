@@ -1,11 +1,15 @@
 /// <reference types="cypress"/> 
 
-/*
-    beforeEach()
-        acessar home
-        clicar em cadastro
-        acessar cadastro
-*/
+
+
+describe('Validação de acesso a tela de cadastro', () => {
+        beforeEach(() => {
+            cy.VisitaTelaCadastro()
+
+            
+        })
+
+
 
 /*
     describe - validar titulo
