@@ -1,7 +1,7 @@
 
 /// <reference types="cypress"/> 
 
-import { createNumberedTest } from '../../support/indice.js';
+
 
 /*
     acessar home
@@ -18,24 +18,26 @@ import { createNumberedTest } from '../../support/indice.js';
 */
 
 context('Tela de cadastro', () => {
-     
 
-    describe('Validação de acesso a tela de cadastro', () => {
+        var cenario = 1
+        var teste = 1
         
-        const teste = createNumberedTest('1');
 
+    describe(`${cenario} - Validação de acesso a tela de cadastro.`, () => {
+        
+        var complemento = 1
 
         beforeEach(() => {
             cy.VisitaTelaCadastro()
         })
 
-        teste('Validar se a tela de cadastro está sendo apresentada', () => {
+        it(`${teste}.${complemento} - Validar se a tela de cadastro está sendo apresentada.`, () => {
             cy.get('.signup-form > h2')
                 .should('have.text', 'New User Signup!')
                 .and('be.visible')
         });
 
-        teste('campos vazios', () => {
+        it(`${teste}.${++complemento} - Validar campos vazios.`, () => {
             cy.get('[data-qa="signup-button"]')
                 .click()
 
@@ -45,7 +47,7 @@ context('Tela de cadastro', () => {
             })
         });
 
-        teste('Email incompleto sem @', () => {
+        it(`${teste}.${++complemento} - Validar Email incompleto sem @.`, () => {
             cy.get('[data-qa="signup-email"]')
                 .type('teste') // e-mail inválido
 
@@ -61,7 +63,7 @@ context('Tela de cadastro', () => {
 
         })
 
-        teste('Email incompleto com @', () => {
+        it(`${teste}.${++complemento} - Validar Email incompleto com @.`, () => {
             cy.get('[data-qa="login-email"]')
                 .type('asdf@') // e-mail inválido
 
@@ -79,27 +81,24 @@ context('Tela de cadastro', () => {
             cy.url().should('include', '/login')
         })
 
-        teste('Dados validos', () => {
+        it(`${teste}.${++complemento} - Validar Dados validos'`, () => {
             cy.LoginNovoUsuario()
         });
     })
-
-    describe('Validação de acesso a tela de cadastro', () => {
-        
-        const teste = createNumberedTest('2');
-
-
+    
+     describe(`${++cenario} - Validação de acesso a tela de cadastro.`, () => {
+        var complemento = 1
         beforeEach(() => {
             cy.VisitaTelaCadastro()
         })
 
-        teste('Validar se a tela de cadastro está sendo apresentada', () => {
+        it(`${teste}.${complemento} - Validar se a tela de cadastro está sendo apresentada.`, () => {
             cy.get('.signup-form > h2')
                 .should('have.text', 'New User Signup!')
                 .and('be.visible')
         });
 
-        teste('campos vazios', () => {
+        it(`${teste}.${++complemento} - Validar campos vazios.`, () => {
             cy.get('[data-qa="signup-button"]')
                 .click()
 
@@ -109,7 +108,7 @@ context('Tela de cadastro', () => {
             })
         });
 
-        teste('Email incompleto sem @', () => {
+        it(`${teste}.${++complemento} - Validar Email incompleto sem @.`, () => {
             cy.get('[data-qa="signup-email"]')
                 .type('teste') // e-mail inválido
 
@@ -125,7 +124,7 @@ context('Tela de cadastro', () => {
 
         })
 
-        teste('Email incompleto com @', () => {
+        it(`${teste}.${++complemento} - Validar Email incompleto com @.`, () => {
             cy.get('[data-qa="login-email"]')
                 .type('asdf@') // e-mail inválido
 
@@ -143,10 +142,70 @@ context('Tela de cadastro', () => {
             cy.url().should('include', '/login')
         })
 
-        teste('Dados validos', () => {
+        it(`${teste}.${++complemento} - Validar Dados validos'`, () => {
             cy.LoginNovoUsuario()
         });
     })
-  
+
+    describe(`${++cenario} - Validação de acesso a tela de cadastro.`, () => {
+        var complemento = 1
+        beforeEach(() => {
+            cy.VisitaTelaCadastro()
+        })
+
+        it(`${teste}.${complemento} - Validar se a tela de cadastro está sendo apresentada.`, () => {
+            cy.get('.signup-form > h2')
+                .should('have.text', 'New User Signup!')
+                .and('be.visible')
+        });
+
+        it(`${teste}.${++complemento} - Validar campos vazios.`, () => {
+            cy.get('[data-qa="signup-button"]')
+                .click()
+
+            cy.get('[data-qa="signup-name"]').then(($input) => {
+                expect($input[0].checkValidity()).to.be.false
+                expect($input[0].validationMessage).to.contain('')
+            })
+        });
+
+        it(`${teste}.${++complemento} - Validar Email incompleto sem @.`, () => {
+            cy.get('[data-qa="signup-email"]')
+                .type('teste') // e-mail inválido
+
+            // Tenta submeter o formulário
+            cy.get('[data-qa="signup-button"]')
+                .click()
+
+            // Verifica se o campo de e-mail foi considerado inválido pelo navegador
+            cy.get('[data-qa="signup-email"]').then(($input) => {
+                expect($input[0].checkValidity()).to.be.false
+                expect($input[0].validationMessage).to.contain('Inclua um "@" no endereço de e-mail.')
+            })
+
+        })
+
+        it(`${teste}.${++complemento} - Validar Email incompleto com @.`, () => {
+            cy.get('[data-qa="login-email"]')
+                .type('asdf@') // e-mail inválido
+
+            // Tenta submeter o formulário
+            cy.get('[data-qa="signup-button"]')
+                .click()
+
+            // Verifica se o campo de e-mail foi considerado inválido pelo navegador
+            cy.get('[data-qa="login-email"]').then(($input) => {
+                expect($input[0].checkValidity()).to.be.false
+                expect($input[0].validationMessage).to.contain('@')
+            })
+
+            // Verifica se ainda está na mesma página (opcional, caso tenha redirecionamento)
+            cy.url().should('include', '/login')
+        })
+
+        it(`${teste}.${++complemento} - Validar Dados validos'`, () => {
+            cy.LoginNovoUsuario()
+        });
+    })
 
 });

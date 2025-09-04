@@ -2,12 +2,34 @@
 
 
 
-describe('Validação de acesso a tela de cadastro', () => {
+context('Tela cadastro novo usuario', () => {
+
+    describe('', () => {
+        
         beforeEach(() => {
             cy.VisitaTelaCadastro()
+            cy.LoginNovoUsuario()
 
-            
         })
+
+        it('Validar se a tela de cadastro está sendo apresentada', () => {
+            cy.get(':nth-child(1) > b')
+                .should('have.text', 'Enter Account Information')
+                .and('be.visible')
+        });
+
+        //1	Não selecionar nenhum título (Mr/Mrs)	Negativo	Mensagem de erro de campo obrigatório
+        //2	Selecionar título Mr	Positivo	Campo aceito sem erro
+        
+        
+    })
+});
+
+
+
+
+
+
 
 
 
